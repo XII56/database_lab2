@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    部门编号 <input type="text" name="department_id" autocomplete="off">
+    部门名称 <input type="text" name="department_name" autocomplete="off">
+    所属银行 <input type="text" name="department_bank" autocomplete="off">
+    <input class="btn" type="submit" name="add" value="添加部门">
+    <input class="btn" type="submit" name="search" value="查找部门">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">部门信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>部门编号</th>
+            <th>部门名称</th>
+            <th>所属银行</th>
+            <th>操作</th>
+        </tr>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department[0] }}</td>
+            <td>{{ department[1] }}</td>
+            <td>{{ department[2] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('department_edit', department_id=department[0]) }}">编辑部门信息</a>
+                <form class="inline-form" method="post" action="{{ url_for('department_delete', department_id=department[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="注销部门" onclick="return confirm('Are you sure?')">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

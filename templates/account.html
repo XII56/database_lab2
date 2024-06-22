@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    账户ID <input type="text" name="account_id" autocomplete="off">
+    账户余额 <input type="text" name="account_balance" autocomplete="off">
+    账户密码 <input type="text" name="account_password" autocomplete="off">
+    持有客户ID <input type="text" name="account_ownerid" autocomplete="off"> 
+    所属银行 <input type="text" name="account_bank" autocomplete="off">
+    <input class="btn" type="submit" name="add" value="注册账户">
+    <input class="btn" type="submit" name="search" value="查找账户">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">账户信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>账户ID</th>
+            <th>账户余额</th>
+            <th>账户密码</th>
+            <th>持有客户ID</th>
+            <th>所属银行</th>
+            <th>操作</th>
+        </tr>
+        {% for account in accounts %}
+        <tr>
+            <td>{{ account[0] }}</td>
+            <td>{{ account[1] }}</td>
+            <td>{{ account[2] }}</td>
+            <td>{{ account[3] }}</td>
+            <td>{{ account[4] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('account_edit', account_id=account[0]) }}">帐户操作</a>
+                <form class="inline-form" method="post" action="{{ url_for('account_delete', account_id=account[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="注销账户" onclick="return confirm('Are you sure?')">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

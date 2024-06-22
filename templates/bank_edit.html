@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Edit bank</h3>
+<form method="post">
+    银行名称 <input type="text" name="bank_name" autocomplete="off" required value="{{ bank[0] }}">
+    银行地址 <input type="text" name="bank_address" autocomplete="off" required value="{{ bank[1] }}">
+    银行电话 <input type="text" name="bank_phone" autocomplete="off" required value="{{ bank[2] }}">
+    <input class="btn" type="submit" name="submit" value="确认修改">
+</form>
+{% endblock %}

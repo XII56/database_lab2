@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Edit customer</h3>
+<form method="post">
+    客户证件号 <input type="text" name="customer_id" autocomplete="off" required value="{{ customer[0] }}">
+    客户姓名 <input type="text" name="customer_name" autocomplete="off" value="{{ customer[1] }}">
+    客户年龄 <input type="text" name="customer_age" autocomplete="off" value="{{ customer[2] }}">
+    客户地址 <input type="text" name="customer_address" autocomplete="off" value="{{ customer[3] }}">
+    客户性别 <input type="text" name="customer_gender" autocomplete="off" value="{{ customer[4] }}">
+    客户电话 <input type="text" name="customer_phone" autocomplete="off" value="{{ customer[5] }}">
+    <input class="btn" type="submit" name="submit" value="确认修改">
+</form>
+{% endblock %}

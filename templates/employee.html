@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    员工编号 <input type="text" name="employee_eid" autocomplete="off">
+    姓名 <input type="text" name="employee_name" autocomplete="off">
+    性别 <input type="text" name="employee_gender" autocomplete="off">
+    年龄 <input type="text" name="employee_age" autocomplete="off">
+    住址 <input type="text" name="employee_address" autocomplete="off">
+    薪水 <input type="text" name="employee_salary" autocomplete="off">
+    职务 <input type="text" name="employee_position" autocomplete="off">
+    证件号码 <input type="text" name="employee_id" autocomplete="off">
+    电话号码 <input type="text" name="employee_phone" autocomplete="off">
+    所在部门 <input type="text" name="employee_department" autocomplete="off">
+    密码 <input type="text" name="employee_password" autocomplete="off">
+    <input class="btn" type="submit" name="add" value="添加员工">
+    <input class="btn" type="submit" name="search" value="查找员工">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">员工信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>员工编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>住址</th>
+            <th>薪水</th>
+            <th>职务</th>
+            <th>证件号码</th>
+            <th>电话号码</th>
+            <th>所在部门</th>
+            <th>密码</th>
+            <th>操作</th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee[0] }}</td>
+            <td>{{ employee[1] }}</td>
+            <td>{{ employee[2] }}</td>
+            <td>{{ employee[3] }}</td>
+            <td>{{ employee[4] }}</td>
+            <td>{{ employee[5] }}</td>
+            <td>{{ employee[6] }}</td>
+            <td>{{ employee[7] }}</td>
+            <td>{{ employee[8] }}</td>
+            <td>{{ employee[9] }}</td>
+            <td>{{ employee[10] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('employee_edit', employee_eid=employee[0]) }}">查看/编辑员工信息</a>
+                <form class="inline-form" method="post" action="{{ url_for('employee_delete', employee_eid=employee[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="注销员工信息" onclick="return confirm('Are you sure?')">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

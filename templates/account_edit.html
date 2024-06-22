@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>账户信息编辑</h3>
+<form method="post">
+    账户ID <input type="text" name="account_id" autocomplete="off" required value="{{ account[0] }}">
+    账户密码 <input type="text" name="account_password" autocomplete="off" required value="{{ account[2] }}">
+    所属客户 <input type="text" name="account_ownerid" autocomplete="off" value="{{ account[3] }}">
+    <input class="btn" type="submit" name="information" value="确认修改">
+</form>
+<h3>账户转账/存取</h3>
+<form method="post">
+    金额 <input type="text" name="account_amount" autocomplete="off" required>
+    目标账户 <input type="text" name="goal_account" autocomplete="off">
+    <input class="btn" type="submit" name="deposit" value="存入">
+    <input class="btn" type="submit" name="withdraw" value="取出">
+    <input class="btn" type="submit" name="transfer" value="转账">
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>银行管理系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    {% endblock %}
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+        <div class="alert">{{ message }}</div>
+    {% endfor %}
+    <h2>
+        <img alt="Bank" class="bank" src="{{ url_for('static', filename='images/bank.png') }}">
+        银行管理系统
+    </h2>
+    <nav>
+        <ul>
+            登入页面
+        </ul>
+    </nav>
+    {% block content %}
+    <h3>Login</h3>
+    <form method="post">
+        Username<br>
+        <input type="text" name="userid" required><br><br>
+        Password<br>
+        <input type="password" name="password" required><br><br>
+        <input class="btn" type="submit" name="submit" value="Submit">
+    </form>
+    {% endblock %}
+</body>
+</html>

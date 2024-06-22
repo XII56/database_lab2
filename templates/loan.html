@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    贷款记录号 <input type="text" name="loan_id" autocomplete="off">
+    贷款金额 <input type="text" name="loan_amount" autocomplete="off">
+    到期时间 <input type="text" name="loan_enddate" autocomplete="off">
+    持有账户ID <input type="text" name="loan_accountid" autocomplete="off"> 
+    发放银行 <input type="text" name="loan_bank" autocomplete="off">
+    <input class="btn" type="submit" name="add" value="办理贷款">
+    <input class="btn" type="submit" name="search" value="查找贷款记录">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">贷款信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>贷款记录号</th>
+            <th>贷款金额</th>
+            <th>到期时间</th>
+            <th>持有账户ID</th>
+            <th>发放银行</th>
+            <th>操作</th>
+        </tr>
+        {% for loan in loans %}
+        <tr>
+            <td>{{ loan[0] }}</td>
+            <td>{{ loan[1] }}</td>
+            <td>{{ loan[2] }}</td>
+            <td>{{ loan[3] }}</td>
+            <td>{{ loan[4] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('loan_edit', loan_id=loan[0]) }}">贷款信息修改</a>
+                <form class="inline-form" method="post" action="{{ url_for('loan_delete', loan_id=loan[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="贷款结项" onclick="return confirm('请确保账户余额充足')">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

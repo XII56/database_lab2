@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    客户证件号 <input type="text" name="customer_id" autocomplete="off">
+    客户姓名 <input type="text" name="customer_name" autocomplete="off">
+    客户年龄 <input type="text" name="customer_age" autocomplete="off">
+    客户地址 <input type="text" name="customer_address" autocomplete="off"> 
+    客户性别 <input type="text" name="customer_gender" autocomplete="off">
+    客户电话 <input type="text" name="customer_phone" autocomplete="off">
+    <input class="btn" type="submit" name="add" value="添加客户">
+    <input class="btn" type="submit" name="search" value="查找客户">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">客户信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>客户证件号</th>
+            <th>客户姓名</th>
+            <th>客户年龄</th>
+            <th>客户地址</th>
+            <th>客户性别</th>
+            <th>客户电话</th>
+            <th>操作</th>
+        </tr>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer[0] }}</td>
+            <td>{{ customer[1] }}</td>
+            <td>{{ customer[2] }}</td>
+            <td>{{ customer[3] }}</td>
+            <td>{{ customer[4] }}</td>
+            <td>{{ customer[5] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('customer_edit', customer_id=customer[0]) }}">编辑客户信息</a>
+                <form class="inline-form" method="post" action="{{ url_for('customer_delete', customer_id=customer[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="注销客户信息" onclick="return confirm('Are you sure?')">
+                </form>
+                <form class="inline-form" method="post" action="{{ url_for('customer_loan_state', customer_id=customer[0]) }}">  
+                    <input class="btn" type="submit" name="loan_state" value="评估贷款偿还能力">  
+                </form>  
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

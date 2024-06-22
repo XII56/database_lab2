@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Edit department</h3>
+<form method="post">
+    部门编号 <input type="text" name="department_id" autocomplete="off" required value="{{ department[0] }}">
+    部门名称 <input type="text" name="department_name" autocomplete="off" required value="{{ department[1] }}">
+    所属银行 <input type="text" name="department_bank" autocomplete="off" required value="{{ department[2] }}">
+    <input class="btn" type="submit" name="submit" value="确认修改">
+</form>
+{% endblock %}

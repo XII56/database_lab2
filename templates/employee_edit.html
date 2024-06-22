@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>员工信息查看/编辑</h3>
+<form method="post">
+    员工编号 <input type="text" name="employee_eid" autocomplete="off" required value="{{ employee[0] }}">
+    姓名 <input type="text" name="employee_name" autocomplete="off" value="{{ employee[1] }}">
+    性别 <input type="text" name="employee_gender" autocomplete="off" value="{{ employee[2] }}">
+    年龄 <input type="text" name="employee_age" autocomplete="off" value="{{ employee[3] }}">
+    住址 <input type="text" name="employee_address" autocomplete="off" value="{{ employee[4] }}">
+    薪水 <input type="text" name="employee_salary" autocomplete="off" value="{{ employee[5] }}">
+    职务 <input type="text" name="employee_position" autocomplete="off" value="{{ employee[6] }}">
+    证件号码 <input type="text" name="employee_id" autocomplete="off" value="{{ employee[7] }}">
+    电话号码 <input type="text" name="employee_phone" autocomplete="off" value="{{ employee[8] }}">
+    所在部门 <input type="text" name="employee_department" autocomplete="off" required value="{{ employee[9] }}">
+    密码 <input type="text" name="employee_password" autocomplete="off" value="{{ employee[10] }}">
+    <input class="btn" type="submit" name="information" value="确认修改">
+</form>
+<h3>员工照片上传</h3>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.photo }}
+    {% for error in form.photo.errors %}
+        <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    {{ form.submit }}
+</form>
+{% if file_url %}
+<br><img class="idphoto" src="{{ file_url }}">
+{% endif %}
+{% endblock %}

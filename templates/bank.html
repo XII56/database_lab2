@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    银行名称 <input type="text" name="bank_name" autocomplete="off">
+    银行地址 <input type="text" name="bank_address" autocomplete="off">
+    银行电话 <input type="text" name="bank_phone" autocomplete="off">
+    下属部门数 <input type="text" name="bank_department_num" autocomplete="off"> 
+    <input class="btn" type="submit" name="add" value="添加银行">
+    <input class="btn" type="submit" name="search" value="查找银行">
+</form>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">银行信息</div>
+  
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>银行名称</th>
+            <th>银行地址</th>
+            <th>银行电话</th>
+            <th>下属部门数</th>
+            <th>操作</th>
+        </tr>
+        {% for bank in banks %}
+        <tr>
+            <td>{{ bank[0] }}</td>
+            <td>{{ bank[1] }}</td>
+            <td>{{ bank[2] }}</td>
+            <td>{{ bank[3] }}</td>
+            <td>
+                <a class="btn" href="{{ url_for('bank_edit', bank_name=bank[0]) }}">编辑银行</a>
+                <form class="inline-form" method="post" action="{{ url_for('bank_delete', bank_name=bank[0]) }}">
+                    <input class="btn" type="submit" name="delete" value="注销银行" onclick="return confirm('Are you sure?')">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
